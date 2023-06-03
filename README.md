@@ -3,6 +3,7 @@
 - Tutor: Nicolas Molina
 - Plataforma: Platzi
 - Segundo curso se la serie de TS
+<hr />
 
 ## Lección 3: Enum
 
@@ -16,5 +17,53 @@ Esto hace que sea más fácil usar los valores correctos y evita que se comentan
       SELLER = "seller",
       CUSTOMER = "customer",
     }
+  </code>
+</pre>
+
+## Leccion 4: Tuplas
+
+Permiten definir Arreglos fuertemente tipados y establecer característacas en las posiciones de los elementos y en la cantidad de los mismos.
+
+Es decir que permiten limitar las posiciones de los arreglos y definir el tipo de dato para cada posición.
+
+### Tipando arreglos sin tuplas
+
+<pre>
+  <code>
+    // Arreglo con un solo tipo de datos
+    const prices: number[] = [1500, 3999, 10000, 300];
+
+    // Arreglo con dos tipos de datos
+    const various: (number | string)[] = [1500, 3000, "Hola"]
+  </code>
+</pre>
+
+### Tipando arreglos con tuplas
+
+<pre>
+  <code>
+    // Arreglo de 2 elementos; string y number
+    const user: [string, number] = ["yilmardev", 30];
+
+    //array de 4 elementos; 2 string 1 number y 1 boolean
+    const product: [string, string, number, boolean] = ["Uniforme médico", "rojo", 95000, true];
+  </code>
+</pre>
+
+### Haciendo desctructuración
+
+Las tuplas permiten hacer desctructuración
+
+<pre>
+  <code>
+    //array de 4 elementos; 2 string 1 number y 1 boolean
+    const product: [string, string, number, boolean] = [
+      'Uniforme médico',
+      'rojo',
+      95000,
+      true,
+    ];
+
+    const [title, color] = product;
   </code>
 </pre>
