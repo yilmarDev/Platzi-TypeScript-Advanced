@@ -67,3 +67,45 @@ Las tuplas permiten hacer desctructuración
     const [title, color] = product;
   </code>
 </pre>
+
+## Tipo unknow
+
+Es una mejor forma de evitar el tipo "any". Es un tipado que nos permite cambiar el tipo de dato que contiene la variable, es esto es muy similar a any.
+
+Sin embargo, unknow no permite ejecutar funciones sin verfificar el tipo de dato.
+
+<pre>
+  <code>
+    let unknowVar: unknown;
+
+    // el tipo unknown permite cambiar el tipo de valor de las variables 
+    unknownVar = 124;
+    unknownVar = null;
+    unknownVar = undefined;
+    unknownVar = {};
+    unknownVar = [];
+
+    // Sin embargo, esta línea da error porque es necesario validar el tipo de valor
+    unknownVar.toUpperCase();
+
+    // Este código funciona porque se hace "verificación de tipo" antes de usar una función de los string
+    if (typeof unknownVar === 'string') {
+      unknownVar.toUpperCase();
+    }
+
+    // Haciendo validación de tipo para asignar el valor unknown a otra variable
+    if(typeof unknownVar === 'boolean') {
+      let unknownVarV2: boolean = unknownVar;
+    }
+  </code>
+</pre>
+
+Aplicándolo en funciones
+
+<pre>
+  <code>
+    const parse = (str: string): unknown => {
+      return JSON.parse(str);
+    }
+  </code>
+</pre>
