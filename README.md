@@ -203,3 +203,51 @@ La solución de JS para este problema es el operador Nullish-coalescing "??", qu
 </pre>
 
 ## Parámetros por defecto en TypeScript
+
+TypeScrip también permite manejar parámetros por defecto, esta es la forma en que se usa:
+
+<pre>
+  <code>
+    export const createProduct = (
+      id: string | number,
+      stock: number = 10,
+      isNew: boolean = true
+    ) => {
+      return { id, stock, isNew };
+    };
+
+    const product1 = createProduct(23, 5, false);
+    const product2 = createProduct(45, 5);
+    const product3 = createProduct(74);
+    
+    console.log(product1);
+    console.log(product2);
+    console.log(product3);
+  </code>
+</pre>
+
+# Parámetros REST
+
+La sintaxis de los parámetros rest nos permiten representar un número indefinido de argumentos como un array.
+
+<pre>
+  <code>
+    function sum(...theArgs) {
+      let total = 0;
+      for (const arg of theArgs) {
+        total += arg;
+      }
+      return total;
+    }
+
+    console.log(sum(1, 2, 3));
+    // Expected output: 6
+
+    console.log(sum(1, 2, 3, 4));
+    // Expected output: 10
+  </code>
+</pre>
+
+Ejemplo más detallado en el archivo src/07-rest.ts
+
+
