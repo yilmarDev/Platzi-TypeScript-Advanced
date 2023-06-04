@@ -5,6 +5,8 @@
 - Segundo curso se la serie de TS
 <hr />
 
+# Módulo 1: Introducción
+
 ## Lección 3: Enum
 
 Se declaran con la palabra reservada "enum" y sus nombre se escriben con mayúsculas, igual que los types nos permiten establecer un conjunto de valores posibles para una variable, pero tienen la ventaja de que estos valores se muestran directamente en el editor de código al momento de usar el enum.
@@ -34,7 +36,7 @@ Es decir que permiten limitar las posiciones de los arreglos y definir el tipo d
     const prices: number[] = [1500, 3999, 10000, 300];
 
     // Arreglo con dos tipos de datos
-    const various: (number | string)[] = [1500, 3000, "Hola"]
+    const various: (number | string)[] = [1500, 3000, "Hola"];
   </code>
 </pre>
 
@@ -146,3 +148,58 @@ TypeScript es capaz de detectar cuando una función nunca se va a detener y la t
     console.log('Hola mundo');
   </code>
 </pre>
+<hr />
+
+# Módulos 2: Funciones
+
+## Parámetros opcionales y Nullish-coalescing
+
+### Parámetros opcionales
+
+Los parámetros opcionales en funciones TS se declaran al añadir un signo de interrogación junsto despues de declarar el parámetro y deben ir al final de la lista de parámetros aceptados por la función.
+
+<pre>
+  <code>
+    export const createProduct = (
+      id: string | number,
+      stock?: number,
+      isNew?: boolean
+    ) => {
+      return { id, stock, isNew };
+    };
+  </code>
+</pre>
+
+En caso de que los parámetros opcionales no se envíen, estos quedarán como undefined, lo que puede causar errores o problemas que van a necesitar validaciones a futuro, para evitar eso podemos establecer valores por defecto para estos parámetros usando "||".
+
+<pre>
+  <code>
+    export const createProduct = (
+      id: string | number,
+      stock?: number,
+      isNew?: boolean
+    ) => {
+      return { id, stock: stock || 10, isNew: stock || true };
+    };
+  </code>
+</pre>
+
+Así, los parámetros opcionales siempre van a tener un vlor definido. Aunque el operador "||" tiene algunos problemas, ya que JS interpreta los valores "0", "" y false como false, así que si se reciben estos valores en uno de los parámetros opcionales se va a utilizar el valor predeterminado, y esto no es lo que queremos.
+
+### Nullish-coalescing "??"
+
+La solución de JS para este problema es el operador Nullish-coalescing "??", que solo va a usar la parte derecha del operador, si la parte izquierda es "null" o "undefined".
+
+<pre>
+  <code>
+    export const createProduct = (
+      id: string | number,
+      stock?: number,
+      isNew?: boolean
+    ) => {
+      return { id, stock: stock ?? 10, isNew: stock ?? true };
+    };
+  </code>
+</pre>
+
+## Parámetros por defecto en TypeScript
