@@ -250,4 +250,54 @@ La sintaxis de los parámetros rest nos permiten representar un número indefini
 
 Ejemplo más detallado en el archivo src/07-rest.ts
 
+## Sobrecarga de funciones
+
+Hay situaciones en las que necesitamos enviarle parámetros a una función para que efectúe acciones basándonos en el tipo de esos parámetros, y JS permite hacerlo, aunque no con mucha seguridad, como en este caso:
+
+<pre>
+  <code>
+    function parseStr(input: string | string[]): string | string[] {
+      if (Array.isArray(input)) return input.join('');
+      else return input.split('');
+    }
+
+    const rtaArray = parseStr('yilmar');
+    if (Array.isArray(rtaArray)) rtaArray.reverse();
+    console.log('rtaArray', 'yilmar =>', rtaArray);
+
+    const rtaStr = parseStr(['y', 'i', 'l', 'm', 'a', 'r']);
+    if (typeof rtaStr === 'string') rtaStr.toLowerCase();
+    console.log('rtaStr', "['y', 'i', 'l', 'm', 'a', 'r'] =>", rtaStr);
+  </code>
+</pre>
+
+La limitante que tiene este código es que al momento de llamar a la función, TS no nos proporciona ayuda sobre las funciones a elegir, ya que TS no puede determinar que tipo de dato está recibiendo exactamente, además, debemos hacer validaciones de tipo para poder usar la función.
+
+Para solucionar este problema existe la sobrecarga de funciones:
+
+<pre>
+  <code>
+    export function parseStr(input: string): string[];
+    export function parseStr(input: string[]): string;
+
+    export function parseStr(input: string | string[]): string | string[] {
+      if (Array.isArray(input)) return input.join('');
+      else return input.split('');
+    }
+
+    const rtaArray = parseStr('yilmar');
+    console.log('rtaArray', 'yilmar =>', rtaArray);
+
+    const rtaStr = parseStr(['y', 'i', 'l', 'm', 'a', 'r']);
+    console.log('rtaStr', "['y', 'i', 'l', 'm', 'a', 'r'] =>", rtaStr);
+  </code>
+</pre>
+
+En esta versión del código el editor nos ayuda más y ya no tenemos que hacer validaciones de tipo.
+
+### Buenas prácticas
+- Si una función tiene sobrecargas y una de ellas recibe parametros de tipo "any" o "unknown" esta sobrecarga debe ir al final.
+- Si una función puede usar una cantidad variable de parámetros, pero en todos los casos retorna algo del mismo tipo, sería mejor usar parámetros opcionales.
+- Si una función puede usar parámetros de diferente tipo pero la salida es del mismo tipo, se puede usar "Union Type" y evitar una sobrecarga.
+
 
