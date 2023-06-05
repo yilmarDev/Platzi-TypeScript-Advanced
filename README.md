@@ -296,8 +296,17 @@ Para solucionar este problema existe la sobrecarga de funciones:
 En esta versión del código el editor nos ayuda más y ya no tenemos que hacer validaciones de tipo.
 
 ### Buenas prácticas
+
 - Si una función tiene sobrecargas y una de ellas recibe parametros de tipo "any" o "unknown" esta sobrecarga debe ir al final.
 - Si una función puede usar una cantidad variable de parámetros, pero en todos los casos retorna algo del mismo tipo, sería mejor usar parámetros opcionales.
 - Si una función puede usar parámetros de diferente tipo pero la salida es del mismo tipo, se puede usar "Union Type" y evitar una sobrecarga.
+
+## Interfaces
+
+Las interfaces funcionan casi del mismo modo que los typos y en muchos casos solucionan los mismos problemas, pero existen algunas diferencias:
+
+- Type solo permite definir tipos primitivos o directos, como: string, number o boolean. 
+- Las interfaces necesitan un cuerpo completo, por lo tanto no es posible definir una interfaz con un solo dato.
+- Las interfaces pueden usar "extend" es decir que pueden heredar.
 
 
