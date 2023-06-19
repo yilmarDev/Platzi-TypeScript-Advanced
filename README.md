@@ -351,3 +351,65 @@ Para lograr esto debemos marcar la propiedad con readonly al momento de declarar
     }
   </code>
 </pre>
+
+## DTO: Data Transfer Objects
+
+Los DTO son versiones ligeramente modificadas o resumidas de los modelos de datos que se usan para fines específicos como enviar data a la BD o cambiar ligeramente los campos que representan las llaves foraneas en la BD.
+
+Esto nos permite generar las versiones que necesitamos del modelo pero conservando la estructura de datos y previniendo problemas futuros al actualizar el modelo.
+
+### Omit
+
+Es un "Utility Type" que nos permite omitir propiedades específicas de una interface o de un type, y nos ayuda a crear los DTO.
+
+<pre>
+  <code>
+    // Interface de producto original y completa
+    export interface Product extends BaseModel {
+      title: string;
+      description: string;
+      image: string;
+      stock: number;
+      size?: Sizes;
+      color: string;
+      price: number;
+      isNew: boolean;
+      tags: string[];
+      category: Category;
+    }
+
+    // Versión modificada del producto para enviar a guardar en BD
+    export interface CreateProductDto
+    
+    interface createProductDto extends Omit< Product, "id" | 'createdAt' | 'updatedAt' | 'category' > {
+      categoryId: string;
+    }
+  </code>
+</pre>
+
+### Pick
+
+Es un "Utility Type" que nos permite seleccionar propiedades específicas de una interface o de un type, y nos ayuda a crear los DTO.
+
+<pre>
+  <code>
+    // Interface de producto original y completa
+    export interface Product extends BaseModel {
+      title: string;
+      description: string;
+      image: string;
+      stock: number;
+      size?: Sizes;
+      color: string;
+      price: number;
+      isNew: boolean;
+      tags: string[];
+      category: Category;
+    }
+
+    // Versión modificada del producto para enviar a guardar en BD
+    export interface CreateProductDto    
+    type example = Pick< Product, 'title' | 'image' | 'color'>
+
+  </code>
+</pre>
