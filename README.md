@@ -358,6 +358,10 @@ Los DTO son versiones ligeramente modificadas o resumidas de los modelos de dato
 
 Esto nos permite generar las versiones que necesitamos del modelo pero conservando la estructura de datos y previniendo problemas futuros al actualizar el modelo.
 
+## Utility Types
+
+Son una herramienta de TS para facilitar las transformaciones de tipos comunes.Estas utilidades están disponibles a nivel global. y entre estas tenemos a: Omit, Pick y Partial entre otros.
+
 ### Omit
 
 Es un "Utility Type" que nos permite omitir propiedades específicas de una interface o de un type, y nos ayuda a crear los DTO.
@@ -410,6 +414,60 @@ Es un "Utility Type" que nos permite seleccionar propiedades específicas de una
     // Versión modificada del producto para enviar a guardar en BD
     export interface CreateProductDto    
     type example = Pick< Product, 'title' | 'image' | 'color'>
+
+  </code>
+</pre>
+
+### Partial
+
+Es un "Utility Type" que permite cambiar las propiedades de una interface y hacerlas opcionales, esto nos permite hacer actualizaciones de entidades de una forma sencilla y sin tener que generar código duplicado.
+
+<pre>
+  <code>
+    // Interface de producto original y completa
+    export interface Product extends BaseModel {
+      title: string;
+      description: string;
+      image: string;
+      stock: number;
+      size?: Sizes;
+      color: string;
+      price: number;
+      isNew: boolean;
+      tags: string[];
+      category: Category;
+    }
+
+    // UpdateProductDto será una versión de las interface CreateProductDto que nos permite enviar una, 
+    // varias o todas las propiedades del producto
+    export interface UpdateProductDto extends Partial< CreateProductDto> {}
+
+  </code>
+</pre>
+
+### Required
+
+Es un "Utility Type" que permite cambiar las propiedades de una interface y hacerlas obligatorias, esto significa que para usar esta interface tenemos que envíar todas las propiedades de product.
+
+<pre>
+  <code>
+    // Interface de producto original y completa
+    export interface Product extends BaseModel {
+      title: string;
+      description: string;
+      image: string;
+      stock: number;
+      size?: Sizes;
+      color: string;
+      price: number;
+      isNew: boolean;
+      tags: string[];
+      category: Category;
+    }
+
+    // RequiredProductDto será una versión de las interface CreateProductDto que nos obliga 
+    // a enviar todas las propiedades del producto
+    export interface RequiredProductDto extends Required< CreateProductDto> {}
 
   </code>
 </pre>
