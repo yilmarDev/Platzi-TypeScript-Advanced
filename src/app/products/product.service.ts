@@ -1,7 +1,11 @@
 import { faker } from '@faker-js/faker';
 
 import { Product } from './product.model';
-import { CreateProductDto, UpdateProductDto } from './product.dto';
+import {
+  CreateProductDto,
+  UpdateProductDto,
+  FindProductDto,
+} from './product.dto';
 export const products: Product[] = [];
 
 export const addProduct = (data: CreateProductDto): Product => {
@@ -35,4 +39,9 @@ export const updateProduct = (
     };
     return products[index];
   }
+};
+
+export const findProducts = (dto: FindProductDto): Product[] => {
+  // dto.image = 'https://picsum/images/';
+  return products;
 };

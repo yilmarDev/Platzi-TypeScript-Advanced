@@ -3,6 +3,7 @@ import {
   products,
   addProduct,
   updateProduct,
+  findProducts,
 } from './products/product.service';
 
 for (let index = 0; index < 50; index++) {

@@ -10,3 +10,5 @@ type example = Pick<Product, 'title' | 'image' | 'color'>;
 export interface UpdateProductDto extends Partial<CreateProductDto> {}
 
 export interface RequiredProductDto extends Required<CreateProductDto> {}
+
+export interface FindProductDto extends Readonly<Partial<Product>> {}

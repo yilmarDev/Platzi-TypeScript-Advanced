@@ -471,3 +471,46 @@ Es un "Utility Type" que permite cambiar las propiedades de una interface y hace
 
   </code>
 </pre>
+
+### Radonly
+
+Es un "Utility Type" que permite modificar las propiedades de la interface para que solo se puedan leer, esto es ideal en casos de buscadores, ya que en esa situación no se quiere que se pueda editar el objeto, solo usar la data para filtrar.
+
+<pre>
+  <code>
+    // Interface de producto original y completa
+    export interface Product extends BaseModel {
+      title: string;
+      description: string;
+      image: string;
+      stock: number;
+      size?: Sizes;
+      color: string;
+      price: number;
+      isNew: boolean;
+      tags: string[];
+      category: Category;
+    }
+
+    // FindProductDto será una versión de las interface Product que recibe una o varias propiedades
+    // del producto para hacer la búsqueda pero no puede modificarlas.
+    export interface FindProductDto extends Readonly< Partial< Product>> {}
+
+  </code>
+</pre>
+
+## Acceder al tipado por índice
+
+Cuando estamos asignando el tipado a una variable es posible acceder a las propieades de la interface usando los [] de la nomenclatura de los arreglos. Esto nos permite acceder al tipado exacto de la propiedad dentro de la interface y puede ayudar en caso de que ese tipado cambie en algún momento.
+
+
+<pre>
+  <code>
+    // Establecemos que el id es de tipo string
+    export const updateProduct = ( id: string, changes: UpdateProductDto ) => { };
+
+    // Establecemos que el id es del mismo tipo que la propiedad id de la interface Product
+    export const updateProduct = ( id: Product[id], changes: UpdateProductDto ) => { };
+
+  </code>
+</pre>
