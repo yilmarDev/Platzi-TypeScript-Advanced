@@ -316,3 +316,38 @@ Las interfaces funcionan casi del mismo modo que los typos y en muchos casos sol
 Las interfaces nos permiten crear estructuras mucho más complejas de tipado, como modelos de entidades.
 
 Puedes observar un ejemplo dentro de la carpeta "src/app" donde se creó una estructura compleja de entidades para administrar órdenes de compra con varios productos de un cliente.
+
+## Extender interfaces
+
+Extender las interfaces nos permiten crear estructuras mucho más complejas de tipado, como modelos de entidades, esto resulta muy útil, ya que podemos generar estructuras de tipado mucho más complejas y eficieentes.
+
+<pre>
+  <code>
+   export interface BaseModel {
+      id: string | number;
+      createdAt: Date;
+      updatedAt: Date;
+    }
+
+    export interface Order extends BaseModel {
+      products: Product[];
+      user: User;
+    }
+  </code>
+</pre>
+
+## Propiedades de solo lectura
+
+Naturalmente las propiedades de un objeto pueden ser sobreescritas y está bien porque los elementos deben poder actualizarse y cambiar según la necesidad del negocio, sin emabargo, hay algunos datos o propieadades que podemos querer evitar que sean actualizables, como el id de una entidad o la fecha de creación del mismo, por ejemplo.
+
+Para lograr esto debemos marcar la propiedad con readonly al momento de declararla.
+
+<pre>
+  <code>
+   export interface BaseModel {
+      readonly id: string | number;
+      readonly createdAt: Date;
+      updatedAt: Date;
+    }
+  </code>
+</pre>
