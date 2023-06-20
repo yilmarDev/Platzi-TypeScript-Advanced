@@ -503,7 +503,6 @@ Es un "Utility Type" que permite modificar las propiedades de la interface para 
 
 Cuando estamos asignando el tipado a una variable es posible acceder a las propieades de la interface usando los [] de la nomenclatura de los arreglos. Esto nos permite acceder al tipado exacto de la propiedad dentro de la interface y puede ayudar en caso de que ese tipado cambie en algún momento.
 
-
 <pre>
   <code>
     // Establecemos que el id es de tipo string
@@ -511,6 +510,28 @@ Cuando estamos asignando el tipado a una variable es posible acceder a las propi
 
     // Establecemos que el id es del mismo tipo que la propiedad id de la interface Product
     export const updateProduct = ( id: Product[id], changes: UpdateProductDto ) => { };
+  </code>
+</pre>
 
+## ReadonlyArray
+
+Existe utility type que permite hacer que un arreglo sea inmutable, esto es muy útil para trabajar con tecnologías como react o Redux que se basan en la inmutabilidad para funcionar correctamente.
+
+<pre>
+  <code>
+    const mutableNumbers: number[] = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11];
+
+    // Métodos mutables que modifican directamente el array
+    mutableNumbers.push(5);
+    mutableNumbers.pop();
+    mutableNumbers.unshift(2);
+
+    const inmutableNumbers: ReadonlyArray<number> = [1, 2, 3, 4, 5, 5, 6, 7, 8];
+
+    //Métodos inmutables que no modifican el array original, en su lugar crear
+    // una copia de este.
+    inmutableNumbers.filter(() => {});
+    inmutableNumbers.reduce(() => 0);
+    inmutableNumbers.map(() => 0);
   </code>
 </pre>

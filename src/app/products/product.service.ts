@@ -42,6 +42,11 @@ export const updateProduct = (
 };
 
 export const findProducts = (dto: FindProductDto): Product[] => {
-  // dto.image = 'https://picsum/images/';
+  // code
+  // dto.color = 'blue';
+  // dto.isNew = true;
+  // dto.tags = [];
+  // dto.tags?.pop();
+  // dto.tags?.push();
   return products;
 };
